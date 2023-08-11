@@ -1,3 +1,3 @@
-const url = "http://localhost:3002pi/";
+const url = "https://api.yuzi.app/";
 
 export default url;
