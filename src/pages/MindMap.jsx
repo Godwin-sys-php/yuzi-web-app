@@ -13,6 +13,7 @@ import {
   TextInput,
   Textarea,
   Button,
+  Alert,
 } from "@mantine/core";
 import useStore from "../store";
 import url from "../services/url";
@@ -119,7 +120,7 @@ class MindMap extends React.Component {
         this.props.store.setCredit(data.user.credits);
         this.setState({ isLoading: false, result: data.output });
       } else {
-        this.setState({ error: data.message });
+        this.setState({ error: data.message, loadingButton: false, result: "", id: null, favorite: false, });
       }
     });
   };
@@ -327,6 +328,7 @@ class MindMap extends React.Component {
               onChange={this._handleElements}
               inputWrapperOrder={["label", "input", "description", "error"]}
             />
+            {this.state.error && <Alert color="red">{this.state.error}</Alert>}
             <br />
             {this._displayButton()}
           </Paper>

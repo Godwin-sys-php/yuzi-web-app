@@ -1,0 +1,9 @@
+.character {
+  border: none;
+  font-size: 20px;
+  border-radius: 8px;
+  
+  color: #fff;
+  background-color: #2b2c3d;
+  border: solid 1px #4d4f66;
+}

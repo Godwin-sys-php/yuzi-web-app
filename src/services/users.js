@@ -12,6 +12,18 @@ export function signup(data) {
     .then(res => res.json());
 }
 
+export function verify(data) {
+  const init = {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    },
+  };
+  return fetch(`${url}/users/verify`, init)
+    .then(res => res.json());
+}
+
 export function login(data) {
   const init = {
     method: 'POST',

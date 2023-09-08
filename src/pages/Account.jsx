@@ -12,6 +12,7 @@ import {
 import AccountCard from "../components/AccountCard";
 import { useNavigate } from "react-router-dom";
 import useStore from "../store";
+import Cookies from "js-cookie";
 
 const useStyles = createStyles((theme) => ({
   icon: {
@@ -28,19 +29,19 @@ const useStyles = createStyles((theme) => ({
 
 export default function Account() {
   const { classes } = useStyles();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const store = useStore();
 
   const _blurPN = (numero) => {
     // Vérifier si le numéro est valide
     // Extraire les parties du numéro
     var indicatif = numero.substring(0, 4);
-    var chiffresMasques = '*****';
+    var chiffresMasques = "*****";
     var numeroFinal = numero.substring(9);
-  
+
     // Retourner le numéro masqué
     return indicatif + chiffresMasques + numeroFinal;
-  }  
+  };
 
   return (
     <>
@@ -99,6 +100,23 @@ export default function Account() {
               to="cyan"
               desc="Naviguez dans votre historique d'utilisation"
               onClick={() => navigate("/account/history")}
+            />
+          </Grid.Col>
+          <Grid.Col sm={12} md={4}>
+            <AccountCard
+              title={"Déconnexion"}
+              icon={<i className="fa-solid fa-right-from-bracket"></i>}
+              from="grey"
+              to="grey"
+              desc="Déconnectez vous de votre compte"
+              onClick={() => {
+                Cookies.remove("token");
+                Cookies.remove("userData");
+                Cookies.remove("id");
+                store.setToken("");
+                store.setUserData({});
+                navigate("/")
+              }}
             />
           </Grid.Col>
         </Grid>

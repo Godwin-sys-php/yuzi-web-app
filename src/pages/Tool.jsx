@@ -18,6 +18,7 @@ import {
   CopyButton,
   ActionIcon,
   Tooltip,
+  Alert,
 } from "@mantine/core";
 import Navbar from "../components/Navbar";
 import tools from "../tools/index";
@@ -29,6 +30,7 @@ import { useNavigate } from "react-router-dom";
 import TextAnimation from "../components/TextAnimation";
 import { io } from "socket.io-client";
 import ModalTool from "../components/ModalTool";
+import { ClimbingBoxLoader } from "react-spinners";
 
 const getToolData = () => {
   const { pathname } = window.location;
@@ -340,6 +342,8 @@ class Tool extends React.Component {
         },
       }).then((res) => res.json());
       if (data.success) {
+        this.props.store.setUserData(data.user);
+        this.props.store.setCredit(data.user.credits);
         this.setState({
           id: data.id,
           loadingButton: false,
@@ -347,7 +351,7 @@ class Tool extends React.Component {
           historyData: data.history,
         });
       } else {
-        this.setState({ error: data.message });
+        this.setState({ error: data.message, loadingButton: false, result: "", id: null, favorite: false, });
       }
     });
   };
@@ -512,6 +516,7 @@ class Tool extends React.Component {
                     </Grid.Col>
                   </Grid>
                   {this._getInput()}
+                  {this.state.error && <Alert color="red">{this.state.error}</Alert>}
                   <br />
                   {this._displayBtn()}
                 </Paper>
@@ -621,6 +626,25 @@ class Tool extends React.Component {
               this.setState({ historyTool: false });
             }}
           />
+        </>
+      );
+    } else {
+      return (
+        <>
+          <Navbar />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "column",
+              alignItems: "center",
+              paddingTop: "10%",
+            }}
+          >
+            <div style={{ marginTop: "10%" }}>
+              <ClimbingBoxLoader size={"200%"} color="#8cb9de" />
+            </div>
+          </div>
         </>
       );
     }
