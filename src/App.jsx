@@ -19,11 +19,16 @@ import Artefact from "./pages/Artefact";
 import Revision from "./pages/Revision";
 import Delete from "./pages/Delete";
 import Redaction from "./pages/Redaction";
+import Conf from "./pages/Conf";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Login />,
+  },
+  {
+    path: "/confidentiality-policies",
+    element: <Conf />,
   },
   {
     path: "/login",
