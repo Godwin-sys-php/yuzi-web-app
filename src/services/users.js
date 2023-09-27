@@ -48,6 +48,30 @@ export function deleteUser(data) {
     .then(res => res.json());
 }
 
+export function fpRequest(data) {
+  const init = {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    },
+  };
+  return fetch(`${url}/users/forgot-password/request`, init)
+    .then(res => res.json());
+}
+
+export function fpApply(data) {
+  const init = {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    },
+  };
+  return fetch(`${url}/users/forgot-password/apply`, init)
+    .then(res => res.json());
+}
+
 export function getOneUser(token, idUser) {
   const init = {
     method: 'GET',

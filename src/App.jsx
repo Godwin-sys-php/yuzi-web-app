@@ -20,6 +20,8 @@ import Revision from "./pages/Revision";
 import Delete from "./pages/Delete";
 import Redaction from "./pages/Redaction";
 import Conf from "./pages/Conf";
+import FPRequest from "./pages/FPRequest";
+import FPApply from "./pages/FPApply";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +31,14 @@ const router = createBrowserRouter([
   {
     path: "/confidentiality-policies",
     element: <Conf />,
+  },
+  {
+    path: "/forgot-password",
+    element: <FPRequest />,
+  },
+  {
+    path: "/reset-password/:token",
+    element: <FPApply />,
   },
   {
     path: "/login",
